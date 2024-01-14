@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,11 +6,27 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 model expenses {
-    id           Int        @id @default(autoincrement())
-    amount         Int?           
-    title    String?   @db.VarChar(100)
-    color String? @db.VarChar(100)
-    createdAt DateTime @default(now()) @db.Timestamp(6)
-    @@unique([id])
+  id         Int      @id @unique @default(autoincrement())
+  amount     Int?
+  title      String?  @db.VarChar(100)
+  color      String?  @db.VarChar(100)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+}
+
+model incomes {
+  id          Int      @id @unique @default(autoincrement())
+  amount      Int?
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+  description String?  @db.VarChar(255)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model users {
+  id         Int
+  name       String   @db.VarChar(255)
+  created_at DateTime @default(now()) @db.DateTime(0)
+
+  @@ignore
 }

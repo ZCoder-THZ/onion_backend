@@ -4,9 +4,11 @@ exports.getExpenses=async (req,res)=>{
 
     const expenses=await prisma.expenses.findMany();
 
+
     return res.status(200).json({
         message:'expense',data:expenses
     })
+
 }
 exports.createExpense=async (req,res)=>{
 
