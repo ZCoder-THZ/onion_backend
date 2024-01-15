@@ -23,10 +23,10 @@ model incomes {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model users {
-  id         Int
+model user {
+  id         Int      @id @unique @default(autoincrement())
+  email      String   @unique
   name       String   @db.VarChar(255)
+  password   String   @db.VarChar(255) // Store hashed and salted passwords
   created_at DateTime @default(now()) @db.DateTime(0)
-
-  @@ignore
 }
