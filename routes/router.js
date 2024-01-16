@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const expenses = require('./expenses/expenses')
+const expenses = require('./expenses/expenses');
+const auth = require('../middleware/auth')
 const incomes = require('./incomes/incomes')
 const users = require('./user/index')
 router.use('/expenses', expenses)
