@@ -8,16 +8,16 @@ datasource db {
 }
 
 model expenses {
-  id         Int      @id @unique @default(autoincrement())
-  amount     Int?
-  title      String?  @db.VarChar(100)
-  color      String?  @db.VarChar(100)
-  created_at DateTime @default(now()) @db.Timestamp(6)
+  id          Int      @id @unique @default(autoincrement())
+  expense     Int?
+  description String?  @db.VarChar(100)
+  color       String?  @db.VarChar(100)
+  created_at  DateTime @default(now()) @db.Timestamp(6)
 }
 
 model incomes {
   id          Int      @id @unique @default(autoincrement())
-  amount      Int?
+  income      Int?
   created_at  DateTime @default(now()) @db.Timestamp(6)
   description String?  @db.VarChar(255)
 }
