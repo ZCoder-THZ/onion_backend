@@ -28,7 +28,7 @@ const verifyUserToken = async (req, res, next) => {
         })
         if (!user) return res.status(401).send("Unauthorized request")
 
-        req.user = { id: user }
+        req.userId = user.id
         next()
     } catch (error) {
         return res.status(401).send("Unauthorized request")

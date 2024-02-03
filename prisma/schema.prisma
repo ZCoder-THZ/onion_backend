@@ -7,26 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model expenses {
+model Expenses {
   id          Int      @id @unique @default(autoincrement())
   expense     Int?
   description String?  @db.VarChar(100)
   color       String?  @db.VarChar(100)
   created_at  DateTime @default(now()) @db.Timestamp(6)
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     Int
 }
 
-model incomes {
+model Incomes {
   id          Int      @id @unique @default(autoincrement())
   income      Int?
   created_at  DateTime @default(now()) @db.Timestamp(6)
   description String?  @db.VarChar(255)
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     Int
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model user {
-  id         Int      @id @unique @default(autoincrement())
-  email      String   @unique
-  name       String   @db.VarChar(255)
-  password   String   @db.VarChar(255) // Store hashed and salted passwords
-  created_at DateTime @default(now()) @db.DateTime(0)
+model User {
+  id         Int        @id @unique @default(autoincrement())
+  email      String     @unique
+  name       String     @db.VarChar(255)
+  password   String     @db.VarChar(255) // Store hashed and salted passwords
+  created_at DateTime   @default(now()) @db.DateTime(0)
+  expenses   Expenses[]
+  incomes    Incomes[]
 }

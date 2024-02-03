@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
             return res.status(200).json({ msg: 'loggedin successfully', data: token })
 
         } else {
-            return res.status(200).json({ msg: 'invalid password' })
+            return res.status(401).json({ msg: 'invalid password', status: 401 })
         }
 
     } catch (error) {
